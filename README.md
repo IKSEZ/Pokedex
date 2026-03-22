@@ -32,7 +32,7 @@ Este projeto implementa uma Pokédex funcional em Dart, demonstrando boas práti
 ### Instalação
 
 ```bash
-git clone https://github.com/seu-usuario/Pokedex.git
+git clone https://github.com/IKSEZ/Pokedex.git
 cd Pokedex
 dart run main.dart
 ```
