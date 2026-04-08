@@ -7,6 +7,8 @@ class Pokemon {
   late int _hpMaximo;
   late bool _capturado;
   bool _hpAtualInicializado = false;
+  String _proximaEvolucao?;
+  late int _nivelEvolucao;
 
   Pokemon({
     required int numero,
@@ -16,6 +18,8 @@ class Pokemon {
     required int hpAtual,
     required int hpMaximo,
     required bool capturado,
+    required String proximaEvolucao,
+    required int nivelEvolucao,
   }) {
     this.numero = numero;
     this.nome = nome;
@@ -24,6 +28,8 @@ class Pokemon {
     this.hpMaximo = hpMaximo;
     this.hpAtual = hpAtual;
     this.capturado = capturado;
+    this.proxEvolucao = proxEvolucao;
+    this.nivelEvolucao = nivelEvolucao;
   }
 
   int get numero => _numero;
@@ -106,6 +112,13 @@ class Pokemon {
       throw ArgumentError('Valor de cura não pode ser negativo.');
     }
     _hpAtual = (_hpAtual + valorCura).clamp(0, _hpMaximo);
+  }
+
+  void evoluir(int nivelEvolucao) {
+    if (proxEvolucao = false) {
+      throw ArgumentError('Pokemon não pode evoluir.');
+    }
+    _proxEvolucao = (_nivelEvolucao > 15)
   }
 
 
