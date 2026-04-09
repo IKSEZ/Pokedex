@@ -17,3 +17,7 @@ Pokemon? buscarPokemon(List<Pokemon> pokedex, String nome) {
   }
   return null;
 }
+
+void evoluiPokemmon(List<Pokemon> pokedex, String nome) {
+  print('Pokemon evoluido para: $proximaEvolucao')
+}

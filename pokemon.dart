@@ -115,10 +115,12 @@ class Pokemon {
   }
 
   void evoluir(int nivelEvolucao) {
-    if (proxEvolucao = false) {
+    if (proxEvolucao = null) {
       throw ArgumentError('Pokemon não pode evoluir.');
     }
-    _proxEvolucao = (_nivelEvolucao > 15)
+    _proxEvolucao >= _nivelEvolucao;
+    _hpMaximo += 20;
+    _hpAtual = _hpAtual;s
   }
 
 
