@@ -8,7 +8,7 @@ final Pokemon chikorita = Pokemon(
   hpAtual: 69,
   hpMaximo: 70,
   capturado: true,
-  proximaEvolucao: Bayleef,
+  proximaEvolucao: 'Bayleef',
   nivelEvolucao: 16,
 );
 
@@ -21,6 +21,7 @@ final Pokemon lucario = Pokemon(
   hpMaximo: 170,
   capturado: true,
   proximaEvolucao: null,
+  nivelEvolucao: 0,
 );
 
 final Pokemon gardevoir = Pokemon(
@@ -32,6 +33,7 @@ final Pokemon gardevoir = Pokemon(
   hpMaximo: 150,
   capturado: true,
   proximaEvolucao: null,
+  nivelEvolucao: 0,
 );
 
 final List<Pokemon> pokedex = [chikorita, lucario, gardevoir];

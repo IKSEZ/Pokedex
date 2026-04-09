@@ -18,6 +18,17 @@ Pokemon? buscarPokemon(List<Pokemon> pokedex, String nome) {
   return null;
 }
 
-void evoluiPokemmon(List<Pokemon> pokedex, String nome) {
-  print('Pokemon evoluido para: $proximaEvolucao')
+void evoluiPokemon(List<Pokemon> pokedex, String nome) {
+  final Pokemon? pokemon = buscarPokemon(pokedex, nome);
+  if (pokemon == null) {
+    print('Pokemon não encontrado: $nome');
+    return;
+  }
+
+  try {
+    pokemon.evoluir();
+    print('Pokemon evoluiu para: ${pokemon.nome}');
+  } on StateError catch (e) {
+    print(e.message);
+  }
 }

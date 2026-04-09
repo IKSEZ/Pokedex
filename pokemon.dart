@@ -7,7 +7,7 @@ class Pokemon {
   late int _hpMaximo;
   late bool _capturado;
   bool _hpAtualInicializado = false;
-  String _proximaEvolucao?;
+  String? _proximaEvolucao;
   late int _nivelEvolucao;
 
   Pokemon({
@@ -18,7 +18,7 @@ class Pokemon {
     required int hpAtual,
     required int hpMaximo,
     required bool capturado,
-    required String proximaEvolucao,
+    required String? proximaEvolucao,
     required int nivelEvolucao,
   }) {
     this.numero = numero;
@@ -28,7 +28,7 @@ class Pokemon {
     this.hpMaximo = hpMaximo;
     this.hpAtual = hpAtual;
     this.capturado = capturado;
-    this.proxEvolucao = proxEvolucao;
+    this.proximaEvolucao = proximaEvolucao;
     this.nivelEvolucao = nivelEvolucao;
   }
 
@@ -91,12 +91,28 @@ class Pokemon {
     _capturado = value;
   }
 
+  String? get proximaEvolucao => _proximaEvolucao;
+  set proximaEvolucao(String? value) {
+    _proximaEvolucao = value?.trim();
+    if (_proximaEvolucao != null && _proximaEvolucao!.isEmpty) {
+      _proximaEvolucao = null;
+    }
+  }
+
+  int get nivelEvolucao => _nivelEvolucao;
+  set nivelEvolucao(int value) {
+    if (value < 0) {
+      throw ArgumentError('Nível de evolução não pode ser negativo.');
+    }
+    _nivelEvolucao = value;
+  }
+
   void subirNivel(int quantidade) {
     if (quantidade < 1) {
       throw ArgumentError('Quantidade deve ser maior ou igual a 1.');
     }
     _nivel += quantidade;
-    _hpMaximo += 10;
+    _hpMaximo += 10 * quantidade;
     _hpAtual = _hpMaximo;
   }
 
@@ -104,29 +120,35 @@ class Pokemon {
     if (dano < 0) {
       throw ArgumentError('Dano deve ser um valor positivo.');
     }
-      _hpAtual = (_hpAtual - dano).clamp(0, _hpMaximo);
+    _hpAtual = (_hpAtual - dano).clamp(0, _hpMaximo);
   }
 
   void curar(int valorCura) {
-   if (valorCura < 0) {
+    if (valorCura < 0) {
       throw ArgumentError('Valor de cura não pode ser negativo.');
     }
     _hpAtual = (_hpAtual + valorCura).clamp(0, _hpMaximo);
   }
 
-  void evoluir(int nivelEvolucao) {
-    if (proxEvolucao = null) {
-      throw ArgumentError('Pokemon não pode evoluir.');
+  void evoluir() {
+    if (_proximaEvolucao == null) {
+      throw StateError('Este Pokemon não tem evolução disponível.');
     }
-    _proxEvolucao >= _nivelEvolucao;
+    if (_nivel < _nivelEvolucao) {
+      throw StateError(
+        'Este Pokemon só evolui no nível $_nivelEvolucao (nível atual: $_nivel).',
+      );
+    }
+
+    _nome = _proximaEvolucao!;
+    _proximaEvolucao = null;
     _hpMaximo += 20;
-    _hpAtual = _hpAtual;s
+    _hpAtual = _hpMaximo;
   }
-
-
 
   @override
   String toString() {
-    return 'Número: $numero, Nome: $nome, Tipo: $tipo, Nível: $nivel, HP: $hpAtual/$hpMaximo, Capturado: ${capturado ? "Sim" : "Não"}';
+    final String proxEvo = proximaEvolucao ?? 'Nenhuma';
+    return 'Número: $numero, Nome: $nome, Tipo: $tipo, Nível: $nivel, HP: $hpAtual/$hpMaximo, Capturado: ${capturado ? "Sim" : "Não"}, Próxima evolução: $proxEvo, Nível de evolução: $nivelEvolucao';
   }
 }

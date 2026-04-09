@@ -1,10 +1,25 @@
 import 'dart:io';
 
 import 'pokedex_data.dart';
-import 'pokedex_service.dart';
 import 'pokemon.dart';
 
 void main() {
+  print('=== Exemplo: Pokemon que ainda não pode evoluir ===');
+  final Pokemon pokemonAindaNaoPodeEvoluir = chikorita;
+  print('Antes: $pokemonAindaNaoPodeEvoluir');
+  try {
+    pokemonAindaNaoPodeEvoluir.evoluir();
+  } on StateError catch (e) {
+    print('Falha ao evoluir: ${e.message}');
+  }
+
+  print('\n=== Exemplo: Pokemon que evolui ===');
+  final Pokemon pokemonQueEvolui = chikorita;
+  pokemonQueEvolui.subirNivel(1);
+  print('Antes: $pokemonQueEvolui');
+  pokemonQueEvolui.evoluir();
+  print('Depois: $pokemonQueEvolui');
+
   print('\n=== Lista Ordenada por Número ===');
   final List<Pokemon> pokedexOrdenada = List<Pokemon>.from(pokedex)
     ..sort((a, b) => a.numero.compareTo(b.numero));
